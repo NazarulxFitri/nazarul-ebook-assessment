@@ -19,19 +19,11 @@ export default function SidebarMenu({
   onSelectPage,
   onOpenSearch,
 }: SidebarMenuProps) {
-  const [filter, setFilter] = useState<"all" | "interactive" | "activities">("all");
+  const [filter, setFilter] = useState<"all" | "interactive">("all");
 
   const filteredPages = EBOOK_PAGES.filter((page) => {
     if (filter === "interactive") {
       return page.hotspots && page.hotspots.length > 0;
-    }
-    if (filter === "activities") {
-      return (
-        page.hotspots &&
-        page.hotspots.some(
-          (h) => h.type === "dragdrop" || h.type === "game" || h.type === "video" || h.type === "audio"
-        )
-      );
     }
     return true;
   });
@@ -96,7 +88,7 @@ export default function SidebarMenu({
           </div>
 
           {/* Mega Menu Category Filter Tabs */}
-          <div className="grid grid-cols-3 gap-1 mt-3 p-1 bg-slate-900/80 rounded-xl border border-white/10 text-[11px] font-bold">
+          <div className="grid grid-cols-2 gap-1.5 mt-3 p-1 bg-slate-900/80 rounded-xl border border-white/10 text-[11px] font-bold">
             <button
               onClick={() => {
                 soundManager.playClick();
@@ -108,7 +100,7 @@ export default function SidebarMenu({
                   : "text-slate-300 hover:text-white hover:bg-white/5"
               }`}
             >
-              All ({EBOOK_PAGES.length})
+              All Pages ({EBOOK_PAGES.length})
             </button>
             <button
               onClick={() => {
@@ -121,20 +113,7 @@ export default function SidebarMenu({
                   : "text-slate-300 hover:text-white hover:bg-white/5"
               }`}
             >
-              Interactive
-            </button>
-            <button
-              onClick={() => {
-                soundManager.playClick();
-                setFilter("activities");
-              }}
-              className={`py-1.5 rounded-lg transition-all text-center cursor-pointer ${
-                filter === "activities"
-                  ? "bg-indigo-600 text-white shadow-xs"
-                  : "text-slate-300 hover:text-white hover:bg-white/5"
-              }`}
-            >
-              Activities
+              Interactive Activities
             </button>
           </div>
         </div>

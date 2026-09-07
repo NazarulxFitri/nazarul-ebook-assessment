@@ -46,7 +46,7 @@ export default function NavigationBar({
             soundManager.playClick();
             onOpenSidebar();
           }}
-          className="flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 hover:border-indigo-300 text-xs font-semibold border border-slate-200 text-slate-700 transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-2xs"
+          className="md:hidden flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 hover:border-indigo-300 text-xs font-semibold border border-slate-200 text-slate-700 transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-2xs"
           title="Open Table of Contents Mega Menu"
         >
           <span className="text-base sm:text-xs">☰</span>
