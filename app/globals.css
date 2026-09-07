@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(241, 245, 249, 0.8);
+    border-radius: 9999px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.4);
+    border-radius: 9999px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.7);
+  }
+
+  .perspective-2000 {
+    perspective: 2500px;
+  }
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  .transform-origin-left {
+    transform-origin: left center;
+  }
+  .transform-origin-right {
+    transform-origin: right center;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* 3D Page Turn Forward Animation */
+@keyframes pageFlipNext {
+  0% {
+    transform: rotateY(0deg);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    box-shadow: -20px 0 30px rgba(0, 0, 0, 0.5);
+  }
+  100% {
+    transform: rotateY(-180deg);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* 3D Page Turn Backward Animation */
+@keyframes pageFlipPrev {
+  0% {
+    transform: rotateY(0deg);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    box-shadow: 20px 0 30px rgba(0, 0, 0, 0.5);
+  }
+  100% {
+    transform: rotateY(180deg);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slideRight {
+  animation: slideRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-pageFlipNext {
+  animation: pageFlipNext 0.55s ease-in-out forwards;
+}
+
+.animate-pageFlipPrev {
+  animation: pageFlipPrev 0.55s ease-in-out forwards;
+}
