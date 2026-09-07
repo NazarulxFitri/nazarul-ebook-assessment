@@ -246,65 +246,85 @@ export default function StarChallengeGameModal({ isOpen, onClose }: StarChalleng
           })}
         </div>
 
-        {/* Question Modal Popup */}
+        {/* Question Modal Popup Overlay */}
         {currentQuestionTile && !isMoving && (
-          <div className="p-6 bg-white border-2 border-indigo-500 rounded-2xl space-y-4 shadow-xl animate-fadeIn">
-            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-indigo-700">
-                Tile {currentQuestionTile.id}: {currentQuestionTile.label}
-              </span>
-              {currentQuestionTile.starBonus && (
-                <span className="px-3 py-1 bg-amber-100 text-amber-900 border border-amber-300 text-xs font-bold rounded-full">
-                  ⭐ Star Reward Challenge
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-fadeIn">
+            <div className="w-full max-w-lg bg-white border-2 border-indigo-500 rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4 animate-scaleIn transform transition-all max-h-[90vh] overflow-y-auto">
+              {/* Question Header */}
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+                <div className="flex items-center gap-2">
+                  <span className="px-2.5 py-1 bg-indigo-100 text-indigo-800 text-xs font-black rounded-lg">
+                    Tile {currentQuestionTile.id}
+                  </span>
+                  <span className="text-xs font-bold text-slate-700 truncate max-w-[180px]">
+                    {currentQuestionTile.label}
+                  </span>
+                </div>
+                {currentQuestionTile.starBonus && (
+                  <span className="px-2.5 py-1 bg-amber-100 text-amber-900 border border-amber-300 text-[11px] font-extrabold rounded-full flex items-center gap-1 shadow-2xs">
+                    <span>⭐</span>
+                    <span>Star Challenge</span>
+                  </span>
+                )}
+              </div>
+
+              {/* Question Body */}
+              <div className="py-1">
+                <span className="text-[11px] font-extrabold uppercase tracking-wider text-indigo-600 block mb-1">
+                  Challenge Question:
                 </span>
+                <h3 className="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                  {currentQuestionTile.question}
+                </h3>
+              </div>
+
+              {/* Answer Options */}
+              {currentQuestionTile.options && (
+                <div className="space-y-2.5 pt-1">
+                  {currentQuestionTile.options.map((opt, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => handleAnswerSubmit(opt)}
+                      disabled={selectedAnswer !== null}
+                      className={`w-full p-3.5 text-left text-xs sm:text-sm font-semibold rounded-2xl border transition-all cursor-pointer flex items-center justify-between ${
+                        selectedAnswer === opt
+                          ? opt === currentQuestionTile.correctAnswer
+                            ? "bg-emerald-50 border-emerald-500 text-emerald-950 font-bold ring-2 ring-emerald-400"
+                            : "bg-rose-50 border-rose-500 text-rose-950 font-bold ring-2 ring-rose-400"
+                          : "bg-slate-50 border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/70 text-slate-800 hover:scale-[1.01]"
+                      }`}
+                    >
+                      <span>{opt}</span>
+                      {selectedAnswer === opt && (
+                        <span>{opt === currentQuestionTile.correctAnswer ? "✅" : "❌"}</span>
+                      )}
+                    </button>
+                  ))}
+                </div>
               )}
-            </div>
 
-            <h3 className="text-lg font-bold text-slate-900">{currentQuestionTile.question}</h3>
-
-            {/* Answer Options */}
-            {currentQuestionTile.options && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
-                {currentQuestionTile.options.map((opt, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => handleAnswerSubmit(opt)}
-                    disabled={selectedAnswer !== null}
-                    className={`p-3.5 text-left text-xs md:text-sm font-semibold rounded-xl border transition-all cursor-pointer ${
-                      selectedAnswer === opt
-                        ? opt === currentQuestionTile.correctAnswer
-                          ? "bg-emerald-100 border-emerald-400 text-emerald-950 font-bold shadow-xs"
-                          : "bg-rose-100 border-rose-400 text-rose-950 font-bold shadow-xs"
-                        : "bg-slate-50 border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/50 text-slate-800"
+              {/* Feedback & Continue */}
+              {questionFeedback && (
+                <div className="space-y-3 pt-3 border-t border-slate-200 animate-fadeIn">
+                  <div
+                    className={`p-3.5 rounded-2xl text-xs sm:text-sm font-semibold border ${
+                      questionFeedback.isCorrect
+                        ? "bg-emerald-50 border-emerald-300 text-emerald-900"
+                        : "bg-rose-50 border-rose-300 text-rose-900"
                     }`}
                   >
-                    {opt}
+                    {questionFeedback.text}
+                  </div>
+
+                  <button
+                    onClick={handleCloseQuestion}
+                    className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-extrabold text-sm rounded-xl shadow-lg transition-all cursor-pointer"
+                  >
+                    Continue Game 🚀
                   </button>
-                ))}
-              </div>
-            )}
-
-            {/* Feedback & Continue */}
-            {questionFeedback && (
-              <div className="space-y-4 pt-3 border-t border-slate-200">
-                <div
-                  className={`p-4 rounded-xl text-sm font-semibold border ${
-                    questionFeedback.isCorrect
-                      ? "bg-emerald-50 border-emerald-300 text-emerald-900"
-                      : "bg-rose-50 border-rose-300 text-rose-900"
-                  }`}
-                >
-                  {questionFeedback.text}
                 </div>
-
-                <button
-                  onClick={handleCloseQuestion}
-                  className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-md transition-colors cursor-pointer"
-                >
-                  Continue Game
-                </button>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         )}
       </div>

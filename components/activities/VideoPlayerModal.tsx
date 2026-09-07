@@ -166,11 +166,11 @@ export default function VideoPlayerModal({ isOpen, onClose }: VideoPlayerModalPr
     >
       <div className="space-y-5">
         {/* Country Video Selector Tabs */}
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-3">
-          <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 border-b border-slate-200 pb-3">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             <button
               onClick={() => handleSelectVideo("japan")}
-              className={`px-4 py-2 rounded-xl text-xs md:text-sm font-black border transition-all flex items-center gap-2 cursor-pointer ${
+              className={`flex-1 sm:flex-none px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-black border transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
                 selectedVideo === "japan"
                   ? "bg-rose-100 border-rose-400 text-rose-900 shadow-xs ring-1 ring-rose-300"
                   : "bg-white border-slate-200 text-slate-600 hover:text-slate-900"
@@ -182,7 +182,7 @@ export default function VideoPlayerModal({ isOpen, onClose }: VideoPlayerModalPr
 
             <button
               onClick={() => handleSelectVideo("india")}
-              className={`px-4 py-2 rounded-xl text-xs md:text-sm font-black border transition-all flex items-center gap-2 cursor-pointer ${
+              className={`flex-1 sm:flex-none px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-black border transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
                 selectedVideo === "india"
                   ? "bg-amber-100 border-amber-400 text-amber-900 shadow-xs ring-1 ring-amber-300"
                   : "bg-white border-slate-200 text-slate-600 hover:text-slate-900"
@@ -193,13 +193,13 @@ export default function VideoPlayerModal({ isOpen, onClose }: VideoPlayerModalPr
             </button>
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex items-center gap-1.5">
             <button
               onClick={() => {
                 soundManager.playClick();
                 setActiveTab("video");
               }}
-              className={`px-3.5 py-1.5 font-bold text-xs rounded-lg border transition-all cursor-pointer ${
+              className={`flex-1 sm:flex-none px-3 py-1.5 font-bold text-xs rounded-lg border transition-all cursor-pointer text-center ${
                 activeTab === "video"
                   ? "bg-indigo-100 border-indigo-400 text-indigo-900 shadow-xs"
                   : "bg-white border-slate-200 text-slate-600 hover:text-slate-900"
@@ -212,7 +212,7 @@ export default function VideoPlayerModal({ isOpen, onClose }: VideoPlayerModalPr
                 soundManager.playClick();
                 setActiveTab("quiz");
               }}
-              className={`px-3.5 py-1.5 font-bold text-xs rounded-lg border transition-all cursor-pointer ${
+              className={`flex-1 sm:flex-none px-3 py-1.5 font-bold text-xs rounded-lg border transition-all cursor-pointer text-center ${
                 activeTab === "quiz"
                   ? "bg-indigo-100 border-indigo-400 text-indigo-900 shadow-xs"
                   : "bg-white border-slate-200 text-slate-600 hover:text-slate-900"
@@ -226,7 +226,7 @@ export default function VideoPlayerModal({ isOpen, onClose }: VideoPlayerModalPr
         {activeTab === "video" ? (
           <div className="space-y-4">
             {/* Dedicated HTML5 Animated Video Player Container */}
-            <div className="relative rounded-2xl overflow-hidden border-2 border-slate-300 bg-slate-950 aspect-video max-h-[480px] shadow-xl flex flex-col justify-between group">
+            <div className="relative rounded-2xl overflow-hidden border-2 border-slate-300 bg-slate-950 min-h-[380px] sm:min-h-0 sm:aspect-video max-h-[500px] shadow-xl flex flex-col justify-between group">
               
               {/* Ken-Burns Motion Background Scene */}
               <div className="absolute inset-0 overflow-hidden">
@@ -238,40 +238,40 @@ export default function VideoPlayerModal({ isOpen, onClose }: VideoPlayerModalPr
                     isPlaying ? "scale-105" : "scale-100"
                   }`}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-slate-950/60" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-slate-950/70" />
               </div>
 
               {/* Video Header Badge */}
-              <div className="relative z-10 p-4 flex items-center justify-between bg-gradient-to-b from-black/80 to-transparent">
-                <div className="flex items-center gap-3">
-                  <span className="text-3xl animate-bounce">{videoData.flag}</span>
+              <div className="relative z-10 p-3 sm:p-4 flex items-center justify-between bg-gradient-to-b from-black/80 to-transparent">
+                <div className="flex items-center gap-2.5">
+                  <span className="text-2xl sm:text-3xl animate-bounce">{videoData.flag}</span>
                   <div>
-                    <h3 className="text-base md:text-lg font-black text-white">{videoData.title}</h3>
-                    <p className="text-xs text-indigo-300 font-medium">Segment {segmentIndex + 1} of {videoData.segments.length}</p>
+                    <h3 className="text-xs sm:text-base md:text-lg font-black text-white">{videoData.title}</h3>
+                    <p className="text-[11px] sm:text-xs text-indigo-300 font-medium">Segment {segmentIndex + 1} of {videoData.segments.length}</p>
                   </div>
                 </div>
 
-                <div className="px-3 py-1 bg-black/70 backdrop-blur-md rounded-full text-xs font-mono font-bold text-amber-300 border border-white/10">
+                <div className="px-2.5 py-1 bg-black/70 backdrop-blur-md rounded-full text-[10px] sm:text-xs font-mono font-bold text-amber-300 border border-white/10 shrink-0">
                   {currentSegment.time}
                 </div>
               </div>
 
               {/* Synchronized Closed Caption Subtitle */}
-              <div className="relative z-10 px-6 py-3 my-auto text-center">
-                <div className="inline-block px-5 py-3 bg-black/90 backdrop-blur-md rounded-2xl border border-amber-500/40 shadow-2xl max-w-2xl">
-                  <p className="text-sm md:text-base font-bold text-amber-200 leading-snug animate-fadeIn">
+              <div className="relative z-10 px-3 sm:px-6 py-2 sm:py-3 my-auto text-center">
+                <div className="inline-block px-3.5 py-2.5 sm:px-5 sm:py-3 bg-black/90 backdrop-blur-md rounded-2xl border border-amber-500/40 shadow-2xl max-w-2xl">
+                  <p className="text-xs sm:text-base font-bold text-amber-200 leading-snug animate-fadeIn">
                     &quot;{currentSegment.text}&quot;
                   </p>
-                  <p className="text-xs font-semibold text-indigo-300 mt-1">
+                  <p className="text-[10px] sm:text-xs font-semibold text-indigo-300 mt-1">
                     📌 {currentSegment.caption}
                   </p>
                 </div>
               </div>
 
               {/* Video Controls Footer */}
-              <div className="relative z-10 p-4 bg-slate-950/90 backdrop-blur-md border-t border-slate-800/80 flex flex-col gap-3">
+              <div className="relative z-10 p-3 sm:p-4 bg-slate-950/90 backdrop-blur-md border-t border-slate-800/80 flex flex-col gap-2.5">
                 {/* Segment Progress Indicators */}
-                <div className="grid grid-cols-4 gap-2">
+                <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
                   {videoData.segments.map((_, idx) => (
                     <button
                       key={idx}
@@ -292,10 +292,10 @@ export default function VideoPlayerModal({ isOpen, onClose }: VideoPlayerModalPr
                 </div>
 
                 <div className="flex items-center justify-between pt-1">
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
                     <button
                       onClick={handlePlayPause}
-                      className="px-5 py-2.5 bg-gradient-to-r from-amber-500 to-indigo-600 hover:from-amber-400 hover:to-indigo-500 text-white font-black text-xs rounded-xl shadow-lg transition-transform active:scale-95 flex items-center gap-1.5 cursor-pointer"
+                      className="flex-1 sm:flex-none px-4 sm:px-5 py-2 sm:py-2.5 bg-gradient-to-r from-amber-500 to-indigo-600 hover:from-amber-400 hover:to-indigo-500 text-white font-black text-xs rounded-xl shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-1.5 cursor-pointer"
                     >
                       <span>{isPlaying ? "⏸ Pause Video" : "▶ Play Video"}</span>
                     </button>
@@ -307,13 +307,13 @@ export default function VideoPlayerModal({ isOpen, onClose }: VideoPlayerModalPr
                         setSegmentIndex(nextIdx);
                         if (isPlaying) speakSegment(nextIdx);
                       }}
-                      className="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-xl border border-slate-700 transition-colors cursor-pointer"
+                      className="px-3 sm:px-3.5 py-2 sm:py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-xl border border-slate-700 transition-colors cursor-pointer shrink-0"
                     >
                       Next Scene ⏭
                     </button>
                   </div>
 
-                  <span className="text-xs text-slate-400 font-medium">
+                  <span className="text-xs text-slate-400 font-medium hidden sm:inline">
                     Line-by-line Sync Narration Enabled
                   </span>
                 </div>

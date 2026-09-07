@@ -112,7 +112,7 @@ export default function AudioPoemPlayerModal({ isOpen, onClose }: AudioPoemPlaye
         onClose();
       }}
       title="Page 135: Audio Poem - The Crayon Box That Talked"
-      badgeText="Audio & Karaoke Text"
+      badgeText="Audio Poem"
       maxWidth="max-w-4xl"
     >
       <div className="space-y-6">
@@ -138,9 +138,8 @@ export default function AudioPoemPlayerModal({ isOpen, onClose }: AudioPoemPlaye
             {[40, 70, 30, 90, 50, 80, 40, 100, 60, 30].map((h, idx) => (
               <div
                 key={idx}
-                className={`w-1.5 rounded-full transition-all duration-300 ${
-                  isPlaying ? "bg-white animate-pulse" : "bg-amber-200/50"
-                }`}
+                className={`w-1.5 rounded-full transition-all duration-300 ${isPlaying ? "bg-white animate-pulse" : "bg-amber-200/50"
+                  }`}
                 style={{ height: isPlaying ? `${Math.max(15, Math.round(h * Math.random()))}px` : "12px" }}
               />
             ))}
@@ -160,13 +159,12 @@ export default function AudioPoemPlayerModal({ isOpen, onClose }: AudioPoemPlaye
                     <p
                       key={lIdx}
                       onClick={() => handleLineClick(lineGlobalIdx)}
-                      className={`cursor-pointer px-4 py-2 rounded-xl text-base md:text-lg font-medium transition-all duration-300 ${
-                        isCurrent && isPlaying
-                          ? "bg-amber-200/80 text-amber-950 font-bold border-l-4 border-amber-500 shadow-sm scale-[1.01]"
-                          : isCurrent
+                      className={`cursor-pointer px-4 py-2 rounded-xl text-base md:text-lg font-medium transition-all duration-300 ${isCurrent && isPlaying
+                        ? "bg-amber-200/80 text-amber-950 font-bold border-l-4 border-amber-500 shadow-sm scale-[1.01]"
+                        : isCurrent
                           ? "bg-amber-100/60 text-amber-900 border-l-4 border-amber-400"
                           : "text-slate-700 hover:bg-amber-100/40 hover:text-slate-900"
-                      }`}
+                        }`}
                     >
                       {line}
                     </p>
