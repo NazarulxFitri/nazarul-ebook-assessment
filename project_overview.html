@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project Overview - Interactive Digital E-Book Platform</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 16mm 14mm 16mm 14mm;
+    }
+    
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #1e293b;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* Page Break Controls */
+    .page-break {
+      page-break-after: always;
+      break-after: page;
+    }
+
+    /* Cover / Header Card */
+    .cover-card {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #0284c7 100%);
+      color: #ffffff;
+      padding: 28px 32px;
+      border-radius: 14px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 20px -5px rgba(30, 27, 75, 0.3);
+    }
+
+    .badge-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #38bdf8;
+      font-weight: 700;
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .cover-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.2;
+      margin: 0 0 8px 0;
+      letter-spacing: -0.4px;
+    }
+
+    .cover-subtitle {
+      font-size: 14px;
+      color: #e0f2fe;
+      font-weight: 400;
+      line-height: 1.45;
+      margin-bottom: 20px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: 16px;
+    }
+
+    .meta-item {
+      font-size: 11px;
+    }
+
+    .meta-label {
+      text-transform: uppercase;
+      color: #93c5fd;
+      font-weight: 700;
+      font-size: 9.5px;
+      letter-spacing: 0.8px;
+      margin-bottom: 2px;
+    }
+
+    .meta-value {
+      font-weight: 600;
+      color: #ffffff;
+      font-size: 12px;
+    }
+
+    /* Section Headers */
+    .section-header {
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 6px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0;
+      letter-spacing: -0.3px;
+    }
+
+    .section-cat {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #4f46e5;
+      letter-spacing: 1px;
+    }
+
+    /* Grids & Cards */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+
+    .card-accent {
+      border-left: 4px solid #4f46e5;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-top: 0;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .icon-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background-color: #e0e7ff;
+      color: #4338ca;
+      font-size: 12px;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 16px;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    /* Feature Rows */
+    .feature-row {
+      display: flex;
+      gap: 14px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+
+    .feature-icon-box {
+      width: 38px;
+      height: 38px;
+      min-width: 38px;
+      border-radius: 8px;
+      background-color: #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .feature-content h4 {
+      margin: 0 0 3px 0;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .feature-content p {
+      margin: 0;
+      font-size: 12px;
+      color: #475569;
+    }
+
+    /* Flow Step Boxes */
+    .flow-step {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-top: 3px solid #0284c7;
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .flow-step-num {
+      font-size: 10px;
+      font-weight: 800;
+      color: #0284c7;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 4px;
+    }
+
+    .flow-step-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .flow-step-desc {
+      font-size: 11.5px;
+      color: #475569;
+      margin: 0;
+    }
+
+    /* Tech Stack Pills */
+    .tech-pill {
+      display: inline-block;
+      padding: 3px 8px;
+      background: #e2e8f0;
+      color: #1e293b;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 4px;
+      margin-right: 4px;
+      margin-bottom: 4px;
+    }
+
+    .doc-footer {
+      font-size: 9.5px;
+      color: #94a3b8;
+      text-align: center;
+      margin-top: 20px;
+      border-top: 1px solid #f1f5f9;
+      padding-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1: PROJECT OVERVIEW & EXECUTIVE SUMMARY -->
+  <div class="page-break">
+    <div class="cover-card">
+      <span class="badge-tag">Project Overview & Architecture</span>
+      <h1 class="cover-title">Interactive E-Book & Gamified Learning Platform</h1>
+      <div class="cover-subtitle">
+        A modern web application digitizing primary school textbook materials into an interactive, multi-modal learning experience.
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-item">
+          <div class="meta-label">Domain</div>
+          <div class="meta-value">Educational Technology (EdTech)</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Target Users</div>
+          <div class="meta-value">Primary Students & Educators</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Curriculum Focus</div>
+          <div class="meta-value">Primary English (Unit 15)</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Core Paradigm</div>
+          <div class="meta-value">Interactive Reader & Gamification</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <h2 class="section-title">1. Project Purpose & Core Solution</h2>
+      <span class="section-cat">Background & Value</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="card card-accent">
+        <h3 class="card-title">
+          <span class="icon-badge">🎯</span> Problem Context
+        </h3>
+        <p>Traditional print textbooks and static PDF documents present key engagement challenges:</p>
+        <ul>
+          <li><strong>Passive Student Engagement:</strong> Static pages lack interactive elements to hold children's focus.</li>
+          <li><strong>Limited Audio/Visual Support:</strong> Language learners lack immediate audio pronunciation or visual context.</li>
+          <li><strong>Delayed Feedback:</strong> Practice exercises require manual teacher review rather than real-time self-assessment.</li>
+        </ul>
+      </div>
+
+      <div class="card card-accent" style="border-left-color: #0284c7;">
+        <h3 class="card-title">
+          <span class="icon-badge">🚀</span> Product Solution
+        </h3>
+        <p>An interactive web application built over digitised textbook pages:</p>
+        <ul>
+          <li><strong>Dual-Page Realistic Reader:</strong> Simulates physical textbook reading while layering digital hotspots.</li>
+          <li><strong>Multi-Modal Media Integration:</strong> Blends visual reading, synchronized audio recitations, and video content.</li>
+          <li><strong>Embedded Gamified Assessment:</strong> Includes drag-and-drop matching and a 3D revision board game.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-header" style="margin-top: 24px;">
+      <h2 class="section-title">2. Target Audience & Deployment Context</h2>
+      <span class="section-cat">User Experience</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h4 style="margin: 0 0 6px 0; color: #0f172a; font-size: 13.5px;">👧 Primary School Learners (Ages 7–12)</h4>
+        <p style="font-size: 12px; color: #475569; margin-bottom: 0;">
+          Designed with large, touch-friendly interactive targets, vibrant visual cards, immediate score feedback, and audio assistance to support self-paced learning and retention.
+        </p>
+      </div>
+      <div class="card">
+        <h4 style="margin: 0 0 6px 0; color: #0f172a; font-size: 13.5px;">👩‍🏫 Classroom & Home Learning</h4>
+        <p style="font-size: 12px; color: #475569; margin-bottom: 0;">
+          Zero-installation browser delivery allows instant use on smartboards, desktop PCs, laptops, and tablets without requiring app downloads or external plug-ins.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 2: KEY PRODUCT FEATURES & MODULES -->
+  <div class="page-break">
+    <div class="section-header">
+      <h2 class="section-title">3. Key Product Features & Interactive Modules</h2>
+      <span class="section-cat">Feature Architecture</span>
+    </div>
+
+    <!-- Feature 1 -->
+    <div class="feature-row">
+      <div class="feature-icon-box" style="background-color: #e0e7ff; color: #4338ca;">📖</div>
+      <div class="feature-content">
+        <h4>Dual-Page E-Book Reader & Navigation Hub</h4>
+        <p>
+          Simulates a physical book with dual-page view, full-screen toggle, page thumbnail drawer, table of contents, and a keyword search index for fast page jumps.
+        </p>
+      </div>
+    </div>
+
+    <!-- Feature 2 -->
+    <div class="feature-row">
+      <div class="feature-icon-box" style="background-color: #fce7f3; color: #be185d;">🧩</div>
+      <div class="feature-content">
+        <h4>Interactive Cultural Drag & Drop Activity (Pages 128 - 129)</h4>
+        <p>
+          A matching matrix where students connect child characters, national flags, native languages, and traditional foods across 8 countries (Canada, Italy, South Africa, Japan, Turkey, Thailand, Australia). Features live score validation.
+        </p>
+      </div>
+    </div>
+
+    <!-- Feature 3 -->
+    <div class="feature-row">
+      <div class="feature-icon-box" style="background-color: #e0f2fe; color: #0369a1;">🎬</div>
+      <div class="feature-content">
+        <h4>Cultural Showcase Video Modal (Page 130)</h4>
+        <p>
+          An embedded video modal illustrating Japanese and Indian cultures, traditional attire, flags, national anthems, and polite greetings (e.g. <em>Bowing</em> vs <em>Namaste</em>).
+        </p>
+      </div>
+    </div>
+
+    <!-- Feature 4 -->
+    <div class="feature-row">
+      <div class="feature-icon-box" style="background-color: #fef3c7; color: #b45309;">🎧</div>
+      <div class="feature-content">
+        <h4>Karaoke Audio Recitation with Word Highlighting (Page 135)</h4>
+        <p>
+          Audio player for the poem <em>"The Crayon Box That Talked"</em>. Features real-time karaoke text highlighting synchronized with audio playback to assist early readers with word recognition and rhythm.
+        </p>
+      </div>
+    </div>
+
+    <!-- Feature 5 -->
+    <div class="feature-row">
+      <div class="feature-icon-box" style="background-color: #dcfce7; color: #15803d;">🎲</div>
+      <div class="feature-content">
+        <h4>"Star Challenge" 3D Digital Revision Board Game (Pages 136 - 137)</h4>
+        <p>
+          An interactive 3D board game that converts unit revision into a game. Includes virtual dice rolling, animated token movements, curriculum trivia (spelling, prepositions, idioms), star rewards, and score tracking.
+        </p>
+      </div>
+    </div>
+
+    <div class="section-header" style="margin-top: 24px;">
+      <h2 class="section-title">4. Technical Stack Summary</h2>
+      <span class="section-cat">Technology</span>
+    </div>
+
+    <div class="card">
+      <div style="margin-bottom: 8px;">
+        <strong style="color: #0f172a;">Core Technologies:</strong><br>
+        <span class="tech-pill">Next.js 16 (App Router)</span>
+        <span class="tech-pill">React 19</span>
+        <span class="tech-pill">TypeScript</span>
+        <span class="tech-pill">Tailwind CSS v4</span>
+        <span class="tech-pill">HTML5 Audio / Video APIs</span>
+      </div>
+      <div>
+        <strong style="color: #0f172a;">Key Architectural Traits:</strong>
+        <ul style="margin-top: 4px; font-size: 12px; color: #475569;">
+          <li><strong>Client-Side State Management:</strong> Responsive UI state updates for modals, reader navigation, and board game logic.</li>
+          <li><strong>Modular Component Architecture:</strong> Decoupled modal components allowing easy addition of new textbook units.</li>
+          <li><strong>Zero Backend Dependency:</strong> Runs completely client-side for ultra-fast load times and offline/classroom deployment capability.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 3: APPLICATION FLOW & SYSTEM ARCHITECTURE -->
+  <div>
+    <div class="section-header">
+      <h2 class="section-title">5. Application User Flow & System Journey</h2>
+      <span class="section-cat">Architecture & Flow</span>
+    </div>
+
+    <div class="grid-3">
+      <div class="flow-step">
+        <div class="flow-step-num">Step 01</div>
+        <div class="flow-step-title">Reader Initialization</div>
+        <div class="flow-step-desc">
+          User opens application; dual-page layout loads page metadata, keywords, and hotspot overlays.
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-step-num">Step 02</div>
+        <div class="flow-step-title">Hotspot Triggering</div>
+        <div class="flow-step-desc">
+          User clicks visual hotspot overlays or bottom bar quick-launchers to activate activity modals.
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-step-num">Step 03</div>
+        <div class="flow-step-title">Interactive Module</div>
+        <div class="flow-step-desc">
+          Modal renders drag-and-drop game, video stream, synchronized audio poem, or 3D board game.
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="flow-step" style="border-top-color: #16a34a;">
+        <div class="flow-step-num" style="color: #16a34a;">Step 04</div>
+        <div class="flow-step-title">Immediate Validation & Feedback</div>
+        <div class="flow-step-desc">
+          System evaluates answers or game moves, providing real-time visual score updates and encouragement.
+        </div>
+      </div>
+
+      <div class="flow-step" style="border-top-color: #9333ea;">
+        <div class="flow-step-num" style="color: #9333ea;">Step 05</div>
+        <div class="flow-step-title">Navigation & Progress</div>
+        <div class="flow-step-desc">
+          User closes modal and continues exploring remaining pages via sidebar index or direct search.
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header" style="margin-top: 24px;">
+      <h2 class="section-title">6. Key Engineering & UX Design Principles</h2>
+      <span class="section-cat">Design System</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h4 style="margin: 0 0 4px 0; color: #0f172a;">⚡ Performance & Load Optimization</h4>
+        <p style="font-size: 12px; color: #475569; margin: 0;">
+          Optimized image assets and lightweight React components ensure zero lag during page flips or activity transitions.
+        </p>
+      </div>
+
+      <div class="card">
+        <h4 style="margin: 0 0 4px 0; color: #0f172a;">♿ Accessibility & Usability</h4>
+        <p style="font-size: 12px; color: #475569; margin: 0;">
+          Vibrant color contrast, readable font hierarchies, clear iconography, and simple click handlers support young users.
+        </p>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      Interactive E-Book & Digital Learning Platform — Product & Technical Overview Dossier
+    </div>
+  </div>
+
+</body>
+</html>

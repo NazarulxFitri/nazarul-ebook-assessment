@@ -13,11 +13,21 @@ import StarChallengeGameModal from "../activities/StarChallengeGameModal";
 
 export default function EBookReader() {
   const [currentPage, setCurrentPage] = useState(128); // Starts at page 128
-  const isDualView = true; // Permanently opted to dual page view
+  const [isDualView, setIsDualView] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
+
+  // Responsive breakpoint check for mobile single page view vs desktop dual view
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDualView(window.innerWidth >= 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Active activity modal state
   const [activeModal, setActiveModal] = useState<"dragdrop" | "video" | "audio" | "game" | null>(null);
@@ -54,12 +64,12 @@ export default function EBookReader() {
   }, []);
 
   const handlePrevPage = () => {
-    const step = 2; // Always step by 2 in dual page view
+    const step = isDualView ? 2 : 1;
     setCurrentPage((prev) => Math.max(128, prev - step));
   };
 
   const handleNextPage = () => {
-    const step = 2; // Always step by 2 in dual page view
+    const step = isDualView ? 2 : 1;
     setCurrentPage((prev) => Math.min(138, prev + step));
   };
 
@@ -121,6 +131,7 @@ export default function EBookReader() {
         totalPages={11}
         minPage={128}
         maxPage={138}
+        isDualView={isDualView}
         onPrevPage={handlePrevPage}
         onNextPage={handleNextPage}
         onOpenSidebar={() => {
@@ -145,13 +156,14 @@ export default function EBookReader() {
             onClose={() => setSidebarOpen(false)}
             currentPage={currentPage}
             onSelectPage={(num) => setCurrentPage(num)}
+            onOpenSearch={() => setSearchOpen(true)}
           />
         )}
 
-        {/* Main eBook Viewer Area - Always Dual Page View */}
+        {/* Main eBook Viewer Area */}
         <main
           className={`flex-1 flex items-center justify-center relative overflow-hidden bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-sky-100 via-indigo-50/70 to-slate-200 ${
-            isFullscreen ? "p-1 sm:p-2" : "p-2"
+            isFullscreen ? "p-1 sm:p-2" : "p-1.5 sm:p-4"
           }`}
         >
           <PageFlipView
@@ -167,12 +179,12 @@ export default function EBookReader() {
 
       {/* Bottom Floating Quick Launcher Bar (Hidden in Fullscreen Mode) */}
       {!isFullscreen && (
-        <footer className="bg-white/90 border-t border-slate-200/90 py-2.5 px-4 z-20 backdrop-blur shadow-sm flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs font-semibold">
-          <span className="text-slate-500 font-bold uppercase tracking-wider hidden sm:inline">Interactive Activities:</span>
+        <footer className="bg-white/90 border-t border-slate-200/90 py-2 px-3 sm:py-2.5 sm:px-4 z-20 backdrop-blur shadow-sm flex items-center gap-2 sm:gap-4 overflow-x-auto no-scrollbar text-xs font-semibold shrink-0">
+          <span className="text-slate-500 font-bold uppercase tracking-wider hidden sm:inline shrink-0">Interactive Activities:</span>
 
           <button
             onClick={() => setActiveModal("dragdrop")}
-            className="px-3.5 py-1.5 rounded-full bg-pink-50 text-pink-700 border border-pink-200 hover:bg-pink-100 hover:border-pink-300 transition-all flex items-center gap-1.5 shadow-xs cursor-pointer active:scale-95"
+            className="shrink-0 px-3.5 py-1.5 rounded-full bg-pink-50 text-pink-700 border border-pink-200 hover:bg-pink-100 hover:border-pink-300 transition-all flex items-center gap-1.5 shadow-xs cursor-pointer active:scale-95"
           >
             <span>🧩</span>
             <span>Drag & Drop (Pg 128-129)</span>
@@ -180,7 +192,7 @@ export default function EBookReader() {
 
           <button
             onClick={() => setActiveModal("video")}
-            className="px-3.5 py-1.5 rounded-full bg-sky-50 text-sky-700 border border-sky-200 hover:bg-sky-100 hover:border-sky-300 transition-all flex items-center gap-1.5 shadow-xs cursor-pointer active:scale-95"
+            className="shrink-0 px-3.5 py-1.5 rounded-full bg-sky-50 text-sky-700 border border-sky-200 hover:bg-sky-100 hover:border-sky-300 transition-all flex items-center gap-1.5 shadow-xs cursor-pointer active:scale-95"
           >
             <span>🎬</span>
             <span>Japan & India Video (Pg 130)</span>
@@ -188,7 +200,7 @@ export default function EBookReader() {
 
           <button
             onClick={() => setActiveModal("audio")}
-            className="px-3.5 py-1.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100 hover:border-amber-300 transition-all flex items-center gap-1.5 shadow-xs cursor-pointer active:scale-95"
+            className="shrink-0 px-3.5 py-1.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100 hover:border-amber-300 transition-all flex items-center gap-1.5 shadow-xs cursor-pointer active:scale-95"
           >
             <span>🎧</span>
             <span>Poem Audio (Pg 135)</span>
@@ -196,7 +208,7 @@ export default function EBookReader() {
 
           <button
             onClick={() => setActiveModal("game")}
-            className="px-3.5 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100 hover:border-emerald-300 transition-all flex items-center gap-1.5 shadow-xs cursor-pointer active:scale-95"
+            className="shrink-0 px-3.5 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100 hover:border-emerald-300 transition-all flex items-center gap-1.5 shadow-xs cursor-pointer active:scale-95"
           >
             <span>🎲</span>
             <span>Star Challenge Game (Pg 136-137)</span>

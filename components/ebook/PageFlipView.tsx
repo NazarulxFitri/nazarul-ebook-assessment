@@ -99,7 +99,7 @@ export default function PageFlipView({
           <button
             onClick={() => handleFlip("prev")}
             disabled={isFlipping}
-            className="absolute left-2 z-30 p-3.5 rounded-full bg-white/95 hover:bg-indigo-600 text-slate-700 hover:text-white shadow-xl backdrop-blur border border-slate-200 transition-all transform hover:scale-110 active:scale-95 disabled:opacity-50 cursor-pointer"
+            className="absolute left-1 sm:left-2 z-30 p-2.5 sm:p-3.5 rounded-full bg-white/95 hover:bg-indigo-600 text-slate-700 hover:text-white shadow-xl backdrop-blur border border-slate-200 transition-all transform hover:scale-110 active:scale-95 disabled:opacity-50 cursor-pointer text-xs sm:text-base"
             aria-label="Previous Page"
           >
             ◀
@@ -111,7 +111,7 @@ export default function PageFlipView({
           <button
             onClick={() => handleFlip("next")}
             disabled={isFlipping}
-            className="absolute right-2 z-30 p-3.5 rounded-full bg-white/95 hover:bg-indigo-600 text-slate-700 hover:text-white shadow-xl backdrop-blur border border-slate-200 transition-all transform hover:scale-110 active:scale-95 disabled:opacity-50 cursor-pointer"
+            className="absolute right-1 sm:right-2 z-30 p-2.5 sm:p-3.5 rounded-full bg-white/95 hover:bg-indigo-600 text-slate-700 hover:text-white shadow-xl backdrop-blur border border-slate-200 transition-all transform hover:scale-110 active:scale-95 disabled:opacity-50 cursor-pointer text-xs sm:text-base"
             aria-label="Next Page"
           >
             ▶
